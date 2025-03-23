@@ -437,7 +437,8 @@ GameObject:
   - component: {fileID: 883425561}
   - component: {fileID: 883425563}
   - component: {fileID: 883425562}
-  - component: {fileID: 883425564}
+  - component: {fileID: 883425565}
+  - component: {fileID: 883425566}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -508,7 +509,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.875, z: 0}
---- !u!114 &883425564
+--- !u!114 &883425565
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -517,48 +518,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 883425560}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d7f0eb7e93402346af5fe3a65d36d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 751797d695786fe4ea184164977b8b7d,
-    type: 3}
-  m_NotificationBehavior: 3
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: af05e3b8-1492-4362-b57d-b6717c72bce6
-    m_ActionName: Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 2b2942c1-5226-4310-8a32-3c56dfd351c5
-    m_ActionName: Player/Look[/Mouse/delta]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 46a0e36c-e7e0-4ac1-938f-2f357ce96f86
-    m_ActionName: Player/Run[/Keyboard/leftShift,/Mouse/rightButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: eb955c8e-5344-4a78-ae20-934afd9cb29b
-    m_ActionName: Player/Attack[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5d6ebf83-e766-42ec-8f3c-e14b653443ba
-    m_ActionName: Player/Jump[/Keyboard/space]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+--- !u!114 &883425566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883425560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 966a842e6256c9e4cab19538aca9ee7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  rotationSpeed: 10
+  jumpHeight: 1.5
 --- !u!1001 &1206244711
 PrefabInstance:
   m_ObjectHideFlags: 0
