@@ -6,31 +6,45 @@ using UnityEngine;
 [Serializable]
 public class Player : MonoBehaviour
 {
+    [field: SerializeField] public PlayerAnimationData AnimationData { get; private set; }
 
-    [field:Header("Animations")]
-    [field:SerializeField] private PlayerAnimationData AnimationData;
+    [field: SerializeField] public PlayerSO Data { get; private set; }
+
+
     public Animator Animator {get; private set;}
     public PlayerController Input{get; private set;}
-    public CharacterController Controller{get; private set;}    
+    public CharacterController Controller{get; private set;}
 
-    [Header("Movement")]
-    public float moveSpeed = 5f;
-    public float rotationSpeed = 10f;
-    public float jumpHeight = 1.5f;
-    
 
-    // Start is called before the first frame update
-    void Start()
+    private PlayerStateMachine stateMachine;
+
+
+    void Awake()
     {
-     AnimationData.Initialize();
-     Animator = GetComponent<Animator>();
-     Input = GetComponent<PlayerController>();
-     Controller = GetComponent<CharacterController>();
+        AnimationData.Initialize();
+
+        Animator = GetComponentInChildren<Animator>();
+        Input = GetComponent<PlayerController>();
+        Controller = GetComponent<CharacterController>();
+
+        stateMachine = new PlayerStateMachine(this);
+
+        stateMachine.ChangeState(stateMachine.IdleState);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+      //  Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void Update()
+    {
+        stateMachine.HandleInput(); 
+        stateMachine.Update();
+    }
+
+    private void FixedUpdate()
+    {
+        stateMachine.PhysicsUpdate();
     }
 }
