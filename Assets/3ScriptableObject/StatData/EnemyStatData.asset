@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: enemy
   LV: 0
-  health: 1
+  maxHealth: 100
   speed: 1
   attackSpeed: 1
   damage: 1
