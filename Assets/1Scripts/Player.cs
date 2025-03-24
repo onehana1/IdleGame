@@ -74,71 +74,11 @@ public class Player : MonoBehaviour
     {
         stateMachine.HandleInput();
         stateMachine.Update();
-
-        // 가장 가까운 적 찾기
-        if (targetEnemy == null)
-        {
-            FindNearestEnemy();
-        }
-
-        if (targetEnemy != null)
-        {
-            // 적을 향해 이동
-            Agent.SetDestination(targetEnemy.transform.position);
-            Debug.Log($"Moving towards enemy: {targetEnemy.name}");
-
-            // 공격 범위 안에 들어오면 공격
-            if (Vector3.Distance(transform.position, targetEnemy.transform.position) <= attackRange)
-            {
-                if (Time.time >= lastAttackTime + attackCooldown)
-                {
-                    Attack();
-                    lastAttackTime = Time.time;
-                }
-            }
-            else
-            {
-                // 적이 너무 멀어지면 끝
-                if (Vector3.Distance(transform.position, targetEnemy.transform.position) > detectionRange)
-                {
-                    targetEnemy = null;
-                }
-            }
-        }
     }
 
     private void FixedUpdate()
     {
         stateMachine.PhysicsUpdate();
-    }
-
-    private void FindNearestEnemy()
-    {
-        // 감지 범위 내의 모든 적 찾기
-        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange, enemyLayer);
-        Debug.Log($"Found {colliders.Length} enemies in range");
-        
-        float nearestDistance = float.MaxValue;
-
-        foreach (Collider collider in colliders)
-        {
-            Enemy enemy = collider.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                float distance = Vector3.Distance(transform.position, enemy.transform.position);
-                Debug.Log($"Enemy found at distance: {distance}");
-                if (distance < nearestDistance)
-                {
-                    nearestDistance = distance;
-                    targetEnemy = enemy;
-                }
-            }
-        }
-
-        if (targetEnemy != null)
-        {
-            Debug.Log($"Target enemy set: {targetEnemy.name}");
-        }
     }
 
     public void Attack()
