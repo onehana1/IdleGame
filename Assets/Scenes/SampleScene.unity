@@ -187,7 +187,7 @@ Transform:
   m_GameObject: {fileID: 67073816}
   serializedVersion: 2
   m_LocalRotation: {x: 0.35694724, y: -7.172724e-37, z: -2.5371515e-37, w: 0.9341246}
-  m_LocalPosition: {x: 0, y: 5.45, z: -9}
+  m_LocalPosition: {x: 0, y: 5.45, z: -13.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -282,7 +282,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.3569473, y: -9.534386e-37, z: 3.6432756e-37, w: 0.9341245}
-  m_LocalPosition: {x: 0, y: 5.45, z: -9}
+  m_LocalPosition: {x: 0, y: 5.45, z: -13.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -559,7 +559,7 @@ Transform:
   m_GameObject: {fileID: 883425560}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2.91}
+  m_LocalPosition: {x: 0, y: 0, z: -7.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -583,7 +583,7 @@ CharacterController:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Height: 1.75
   m_Radius: 0.25
@@ -634,6 +634,10 @@ MonoBehaviour:
   attackRange: 2
   attackDamage: 10
   attackCooldown: 1
+  detectionRange: 20
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &883425567
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
 
     private EnemyStateMachine stateMachine;
 
+    private SkinnedMeshRenderer meshRenderer;
+
     private void Awake()
     {
         AnimationData.Initialize();
@@ -20,11 +22,21 @@ public class Enemy : MonoBehaviour
         Animator = GetComponentInChildren<Animator>();
         Controller = GetComponent<CharacterController>();
         ForceReceiver = GetComponent<ForceReceiver>();
+        meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
 
         stateMachine = new EnemyStateMachine(this);
         stateMachine.ChangeState(stateMachine.IdleState);
+
+        if (meshRenderer != null && Data != null)
+        {
+            meshRenderer.material.SetColor("_MainColor", Data.Color);
+        }
     }
 
+    private void Start()
+    {
+
+    }
     private void Update()
     {
         stateMachine.HandleInput();
