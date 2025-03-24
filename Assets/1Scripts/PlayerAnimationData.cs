@@ -30,6 +30,9 @@ public class PlayerAnimationData
     public int JumpParameterHash{get; private set;}
     public int FallParameterHash{get; private set;}
 
+    public int AttackParameterHash{get; private set;}
+    public int ComboAttackParameterHash{get; private set;}
+
     public void Initialize()
     {
         GroundParameterHash = Animator.StringToHash(groundParameterName);
@@ -39,6 +42,8 @@ public class PlayerAnimationData
         AirParameterHash = Animator.StringToHash(airParameterName); 
         JumpParameterHash = Animator.StringToHash(jumpParameterName);
         FallParameterHash = Animator.StringToHash(fallParameterName);
+        AttackParameterHash = Animator.StringToHash(attackParameterName);
+        ComboAttackParameterHash = Animator.StringToHash(comboAttackParameterName);
     }
     
 }
