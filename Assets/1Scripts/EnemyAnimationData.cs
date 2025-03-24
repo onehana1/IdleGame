@@ -8,17 +8,17 @@ public class EnemyAnimationData
 {
     [SerializeField] private string idleParameterName = "Idle";
     [SerializeField] private string attackParameterName = "Attack";
-    [SerializeField] private string walkParameterName = "Walk";
+    [SerializeField] private string moveParameterName = "Move";
 
     public int IdleParameterHash { get; private set; }
     public int AttackParameterHash { get; private set; }
-    public int WalkParameterHash { get; private set; }
+    public int MoveParameterHash { get; private set; }
 
 
     public void Initialize()
     {
         IdleParameterHash = Animator.StringToHash(idleParameterName);
         AttackParameterHash = Animator.StringToHash(attackParameterName);
-        WalkParameterHash = Animator.StringToHash(walkParameterName);
+        MoveParameterHash = Animator.StringToHash(moveParameterName);
     }
 }
