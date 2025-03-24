@@ -8,17 +8,24 @@ public class HPBar : MonoBehaviour
 {
     [SerializeField] private Image hpFillImage;
     [SerializeField] private TextMeshProUGUI hpText;
-    [SerializeField] private Player player;
+    [SerializeField] private Transform target;
 
+    private IDamageable damageable;
+
+
+    void Start()
+    {
+        damageable = target.GetComponent<IDamageable>();
+    }
     private void Update()
     {
-        if (player == null) return;
+        if (target == null) return;
 
         // HP 바 채우기 업데이트
-        float fillAmount = player.CurrentHealth / player.MaxHealth;
+        float fillAmount = damageable.CurrentHealth / damageable.MaxHealth;
         hpFillImage.fillAmount = fillAmount;
 
         // HP 텍스트 업데이트 (현재 체력/최대 체력)
-        hpText.text = $"{Mathf.Ceil(player.CurrentHealth)} / {player.MaxHealth}";
+        hpText.text = $"{Mathf.Ceil(damageable.CurrentHealth)} / {damageable.MaxHealth}";
     }
 }
