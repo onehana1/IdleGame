@@ -27,6 +27,15 @@ public class PlayerStateMachine : StateMachine
     public int ComboIndex{ get; set; }
 
 
+
+    public Enemy TargetEnemy => Player.TargetEnemy;
+    public Transform Transform => Player.transform;
+    public float AttackRange => Player.AttackRange;
+    public float AttackDamage => Player.AttackDamage;
+
+
+
+
     public Transform MainCameraTransform { get; set; }
 
     public PlayerStateMachine(Player player)

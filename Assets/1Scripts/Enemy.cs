@@ -81,18 +81,23 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
+        if (!IsAlive) return;
+
         float actualDamage = Mathf.Max(0, damage - Data.StatData.defense);
         currentHealth = Mathf.Max(0, currentHealth - actualDamage);
 
         if (!IsAlive)
         {
-            // TODO: 사망 처리
+            // 사망 처리
             Debug.Log($"{gameObject.name} died!");
+            // TODO: 사망 상태로 전환
+            // stateMachine.ChangeState(stateMachine.DeathState);
         }
         else
         {
-            // TODO: 피격 애니메이션 또는 효과
             Debug.Log($"{gameObject.name} took {actualDamage} damage! Current health: {currentHealth}");
+            // TODO: 피격 상태로 전환
+            // stateMachine.ChangeState(stateMachine.HitState);
         }
     }
 }

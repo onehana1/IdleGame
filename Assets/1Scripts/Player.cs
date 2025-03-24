@@ -126,16 +126,41 @@ public class Player : MonoBehaviour, IDamageDealer, IDamageable
     {
         if (target != null)
         {
-            target.TakeDamage(Damage);
+            target.TakeDamage(attackDamage);
         }
     }
 
     public void Attack()
     {
-        if (targetEnemy != null && targetEnemy is IDamageable damageable)
+        if (targetEnemy == null)
         {
-            DealDamage(damageable);
+            Debug.Log("No target enemy");
+            return;
+        }
+
+        if (Time.time < lastAttackTime + attackCooldown)
+        {
+            Debug.Log("Attack on cooldown");
+            return;
+        }
+
+        float distanceToEnemy = Vector3.Distance(transform.position, targetEnemy.transform.position);
+        
+        if (distanceToEnemy > attackRange)
+        {
+            Debug.Log($"Enemy too far to attack. Distance: {distanceToEnemy}, Attack Range: {attackRange}");
+            return;
+        }
+
+        if (targetEnemy.TryGetComponent<IDamageable>(out IDamageable damageable))
+        {
+            damageable.TakeDamage(attackDamage);
+            Debug.Log($"Dealt {attackDamage} damage to {targetEnemy.name}");
             lastAttackTime = Time.time;
+        }
+        else
+        {
+            Debug.Log($"Enemy {targetEnemy.name} is not damageable");
         }
     }
 }
