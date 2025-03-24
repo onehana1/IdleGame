@@ -4,32 +4,35 @@ using UnityEngine;
 
 public class PlayerIdleState : PlayerGroundedState
 {
+    private float idleTimer = 0f;
+    private const float IDLE_DURATION = 1f;
+
     public PlayerIdleState(PlayerStateMachine playerStateMachine) : base(playerStateMachine)
     {
     }
 
     public override void Enter()
     {
-        stateMachine.MovementSpeedModifier = 0f;
-        base.Enter();
         StartAnimation(stateMachine.Player.AnimationData.IdleParameterHash);
     }
 
     public override void Exit()
     {
-        base.Exit();
         StopAnimation(stateMachine.Player.AnimationData.IdleParameterHash);
+        idleTimer = 0f;
     }
 
+    public override void HandleInput(){}
     public override void Update()
     {
-        base.Update();
+        idleTimer += Time.deltaTime;
 
-        if(stateMachine.MovementInput != Vector2.zero)
+        if(idleTimer >= IDLE_DURATION)
         {
-            stateMachine.ChangeState(stateMachine.WalkState);
-            return;
+            stateMachine.ChangeState(stateMachine.MoveState);
         }
 
     }
+
+    public override void PhysicsUpdate(){}
 }

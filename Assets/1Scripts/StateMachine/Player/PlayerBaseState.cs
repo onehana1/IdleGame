@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerBaseState : IState
 {
+
     protected PlayerStateMachine stateMachine;
     protected readonly PlayerGroundData groundData;
 

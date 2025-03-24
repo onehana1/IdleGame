@@ -10,6 +10,8 @@ public class PlayerStateMachine : StateMachine
     public PlayerWalkState WalkState { get; private set; }
     public PlayerRunState RunState { get; private set; }
 
+    public PlayerMoveState MoveState { get; private set; }  // 얘가 적 찾아서 움직이는거
+
     public PlayerJumpState JumpState { get; private set; }
     public PlayerFallState FallState { get; private set; }
 
@@ -38,6 +40,7 @@ public class PlayerStateMachine : StateMachine
         RunState = new PlayerRunState(this);
         JumpState = new PlayerJumpState(this);
         FallState = new PlayerFallState(this);
+        MoveState = new PlayerMoveState(this);
         ComboAttackState = new PlayerComboAttackState(this);
         MovementSpeed = player.Data.GroundedData.BaseSpeed;
         RotationDamping = player.Data.GroundedData.BaseRotationDamping;
