@@ -17,7 +17,7 @@ public abstract class BaseStatData : ScriptableObject
     public float LV;
 
     [Header("Stat")]
-    public float health;
+    public float maxHealth;
     public float speed;
     public float attackSpeed;
     public float damage;

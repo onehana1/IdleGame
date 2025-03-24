@@ -9,17 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 7ca71216bef129d418d4d711405c58f8, type: 3}
   m_Name: PlayerStatData
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerStatData
+  m_EditorClassIdentifier: 
   characterName: Player
   LV: 0
-  health: 100
+  maxHealth: 100
   speed: 3
   attackSpeed: 3
   damage: 3
   defense: 3
   criticalChance: 3
-  criticalDamage: 6
-  manaPoints: 0
-  staminaPoints: 0
+  criticalDamage: 3
+  manaPoints: 3
+  staminaPoints: 3

@@ -45,3 +45,5 @@ MonoBehaviour:
       Damage: 10
       <Dealing_Start_TransitionTime>k__BackingField: 0
       <Dealing_End_TransitionTime>k__BackingField: 0
+  <StatData>k__BackingField: {fileID: 11400000, guid: 785966ec33e267845a0fc37b92ed59b9,
+    type: 2}

@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IDamageable
 {
     [field: SerializeField] public EnemyAnimationData AnimationData { get; private set; }
     [field: SerializeField] public EnemySO Data { get; private set; }
+
+    private float currentHealth;
+    public bool IsAlive => currentHealth > 0;
+    public float CurrentHealth => currentHealth;
+    public float MaxHealth => Data.StatData.maxHealth;
 
     public Animator Animator { get; private set; }
     public CharacterController Controller { get; private set; }
@@ -18,6 +23,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         AnimationData.Initialize();
+        currentHealth = Data.StatData.maxHealth;
         
         Animator = GetComponentInChildren<Animator>();
         Controller = GetComponent<CharacterController>();
@@ -75,8 +81,18 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        // 데미지 계산 및 처리
         float actualDamage = Mathf.Max(0, damage - Data.StatData.defense);
-        // TODO: 체력 감소 및 사망 처리
+        currentHealth = Mathf.Max(0, currentHealth - actualDamage);
+
+        if (!IsAlive)
+        {
+            // TODO: 사망 처리
+            Debug.Log($"{gameObject.name} died!");
+        }
+        else
+        {
+            // TODO: 피격 애니메이션 또는 효과
+            Debug.Log($"{gameObject.name} took {actualDamage} damage! Current health: {currentHealth}");
+        }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [Serializable]
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageDealer, IDamageable
 {
     [field: SerializeField] public PlayerAnimationData AnimationData { get; private set; }
 
@@ -40,17 +40,41 @@ public class Player : MonoBehaviour
     private float lastAttackTime;
     private Enemy targetEnemy;
 
+
     public Enemy TargetEnemy
     {
         get => targetEnemy;
         set => targetEnemy = value;
     }
 
+    private float currentHealth;
+    public bool IsAlive => currentHealth > 0;
+    public float CurrentHealth => currentHealth;
+    public float MaxHealth => Data.StatData.maxHealth;
+    public float Damage => attackDamage;
+
     void Awake()
     {
-        AnimationData.Initialize();
-        Animator = GetComponentInChildren<Animator>();
+        if (AnimationData != null)
+        {
+            AnimationData.Initialize();
+        }
+        else
+        {
+            Debug.LogError("AnimationData is not assigned to the Player!");
+        }
 
+        if (Data != null && Data.StatData != null)
+        {
+            currentHealth = Data.StatData.maxHealth;
+        }
+        else
+        {
+            Debug.LogError("Data or StatData is not properly set up in the Player!");
+            currentHealth = 100f; // 기본값 설정
+        }
+        
+        Animator = GetComponentInChildren<Animator>();
         Input = GetComponent<PlayerController>();
         Controller = GetComponent<CharacterController>();
         ForceReceiver = GetComponent<ForceReceiver>();
@@ -81,11 +105,36 @@ public class Player : MonoBehaviour
         stateMachine.PhysicsUpdate();
     }
 
+    public void TakeDamage(float damage)
+    {
+        float actualDamage = Mathf.Max(0, damage - Data.StatData.defense);
+        currentHealth = Mathf.Max(0, currentHealth - actualDamage);
+
+        if (!IsAlive)
+        {
+            // TODO: 사망 처리
+            Debug.Log("Player died!");
+        }
+        else
+        {
+            // TODO: 피격 애니메이션 또는 효과
+            Debug.Log($"Player took {actualDamage} damage! Current health: {currentHealth}");
+        }
+    }
+
+    public void DealDamage(IDamageable target)
+    {
+        if (target != null)
+        {
+            target.TakeDamage(Damage);
+        }
+    }
+
     public void Attack()
     {
-        if (targetEnemy != null && Time.time >= lastAttackTime + attackCooldown)
+        if (targetEnemy != null && targetEnemy is IDamageable damageable)
         {
-            targetEnemy.TakeDamage(attackDamage);
+            DealDamage(damageable);
             lastAttackTime = Time.time;
         }
     }
