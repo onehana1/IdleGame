@@ -40,6 +40,17 @@ public class Player : MonoBehaviour, IDamageDealer, IDamageable
     private Enemy targetEnemy;
 
 
+
+
+    [Header("Inventory")]
+
+    public PlayerEquipment equipment;
+    public ItemData itemData;
+    public Action addItem;
+
+
+
+
     public Enemy TargetEnemy
     {
         get => targetEnemy;
