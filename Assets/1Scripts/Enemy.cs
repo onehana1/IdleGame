@@ -92,10 +92,7 @@ public class Enemy : MonoBehaviour, IDamageable, IDamageDealer
 
         if (!IsAlive)
         {
-            // 사망 처리
-            Debug.Log($"{gameObject.name} died!");
-            // TODO: 사망 상태로 전환
-            // stateMachine.ChangeState(stateMachine.DeathState);
+            Die();
         }
         else
         {
@@ -103,6 +100,35 @@ public class Enemy : MonoBehaviour, IDamageable, IDamageDealer
             // TODO: 피격 상태로 전환
             // stateMachine.ChangeState(stateMachine.HitState);
         }
+    }
+
+    private void Die()
+    {
+        Debug.Log($"{gameObject.name} died!");
+
+        if (Animator != null)
+        {
+            Animator.enabled = false;
+        }
+
+        if (Controller != null)
+        {
+            Controller.enabled = false;
+        }
+
+        if (TryGetComponent<Collider>(out Collider collider))
+        {
+            collider.enabled = false;
+        }
+
+        StartCoroutine(DestroyAfterDelay());
+    }
+
+    private IEnumerator DestroyAfterDelay()
+    {
+        yield return new WaitForSeconds(3f);
+        
+        Destroy(gameObject);
     }
 
     public void DealDamage(IDamageable target)

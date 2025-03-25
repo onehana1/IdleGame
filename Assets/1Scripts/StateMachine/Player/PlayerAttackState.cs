@@ -23,8 +23,11 @@ public class PlayerAttackState : PlayerBaseState
 
     public override void Update()
     {
-        if (stateMachine.TargetEnemy == null)
+        // 타겟이 없거나 죽은 경우 체크
+        if (stateMachine.TargetEnemy == null || !stateMachine.TargetEnemy.IsAlive)
         {
+            Debug.Log("Target is dead or null, changing to idle state");
+            stateMachine.Player.TargetEnemy = null;  // 타겟 초기화
             stateMachine.ChangeState(stateMachine.IdleState);
             return;
         }
@@ -32,6 +35,7 @@ public class PlayerAttackState : PlayerBaseState
         float distanceToEnemy = Vector3.Distance(stateMachine.Transform.position, stateMachine.TargetEnemy.transform.position);
         if (distanceToEnemy > stateMachine.Player.AttackRange)
         {
+            Debug.Log("Target out of range, changing to move state");
             stateMachine.ChangeState(stateMachine.MoveState);
             return;
         }
@@ -44,29 +48,16 @@ public class PlayerAttackState : PlayerBaseState
 
     private void Attack()
     {
-        if (stateMachine.TargetEnemy == null)
+        if (stateMachine.TargetEnemy == null || !stateMachine.TargetEnemy.IsAlive)
         {
-            Debug.Log("No target enemy");
-            return;
-        }
-
-        float distanceToEnemy = Vector3.Distance(stateMachine.Transform.position, stateMachine.TargetEnemy.transform.position);
-
-        if (distanceToEnemy > stateMachine.Player.AttackRange)
-        {
-            Debug.Log($"Enemy too far to attack. Distance: {distanceToEnemy}, Attack Range: {stateMachine.Player.AttackRange}");
             return;
         }
 
         if (stateMachine.TargetEnemy.TryGetComponent<IDamageable>(out IDamageable damageable))
         {
             damageable.TakeDamage(stateMachine.Player.Damage);
-            Debug.Log($"Dealt {stateMachine.Player.Damage} damage to {stateMachine.TargetEnemy.name}");
+            Debug.Log($"Attack hit! Dealt {stateMachine.Player.Damage} damage to {stateMachine.TargetEnemy.name}");
             lastAttackTime = Time.time;
-        }
-        else
-        {
-            Debug.Log($"Enemy {stateMachine.TargetEnemy.name} is not damageable");
         }
     }
 

@@ -10,15 +10,18 @@ public class PlayerMoveState : PlayerBaseState
 
     public override void Enter()
     {
+        Debug.Log("Entering Move State");
         StartAnimation(stateMachine.Player.AnimationData.WalkParameterHash);
+
+        FindNearestEnemy();
     }
 
     public override void Exit()
     {
         StopAnimation(stateMachine.Player.AnimationData.WalkParameterHash);
     }
-    
-    public override void HandleInput(){}
+
+    public override void HandleInput() { }
 
     public override void Update()
     {
@@ -26,6 +29,7 @@ public class PlayerMoveState : PlayerBaseState
         if (stateMachine.Player.TargetEnemy == null)
         {
             FindNearestEnemy();
+            // 적이 없으면 idle 상태
             if (stateMachine.Player.TargetEnemy == null)
             {
                 stateMachine.ChangeState(stateMachine.IdleState);
@@ -47,11 +51,13 @@ public class PlayerMoveState : PlayerBaseState
             stateMachine.Player.TargetEnemy = null;
             stateMachine.ChangeState(stateMachine.IdleState);
         }
+
+
+        
     }
 
     public override void PhysicsUpdate()
     {
-        // 물리 업데이트 없음
     }
 
     private void FindNearestEnemy()
@@ -62,8 +68,8 @@ public class PlayerMoveState : PlayerBaseState
 
         foreach (Collider collider in colliders)
         {
-            Enemy enemy = collider.GetComponent<Enemy>();
-            if (enemy != null)
+
+            if (collider.gameObject.TryGetComponent<Enemy>(out Enemy enemy) && enemy.IsAlive)
             {
                 float distance = Vector3.Distance(stateMachine.Player.transform.position, enemy.transform.position);
                 if (distance < nearestDistance)
@@ -71,6 +77,7 @@ public class PlayerMoveState : PlayerBaseState
                     nearestDistance = distance;
                     stateMachine.Player.TargetEnemy = enemy;
                 }
+
             }
         }
     }
