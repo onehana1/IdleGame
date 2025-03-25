@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IDamageable
+public class Enemy : MonoBehaviour, IDamageable, IDamageDealer
 {
     [field: SerializeField] public EnemyAnimationData AnimationData { get; private set; }
     [field: SerializeField] public EnemySO Data { get; private set; }
 
+    [SerializeField] private float attackDamage = 10f;
     private float currentHealth;
     public bool IsAlive => currentHealth > 0;
     public float CurrentHealth => currentHealth;
     public float MaxHealth => Data.StatData.maxHealth;
+    public float Damage => Data.StatData.damage;
+    public float AttackRange => Data.StatData.attackRange;
+
 
     public Animator Animator { get; private set; }
     public CharacterController Controller { get; private set; }
@@ -100,4 +104,14 @@ public class Enemy : MonoBehaviour, IDamageable
             // stateMachine.ChangeState(stateMachine.HitState);
         }
     }
+
+    public void DealDamage(IDamageable target)
+    {
+        if (target != null)
+        {
+            target.TakeDamage(attackDamage);
+        }
+    }
+
 }
+

@@ -1287,8 +1287,7 @@ MonoBehaviour:
   moveSpeed: 5
   rotationSpeed: 10
   stoppingDistance: 1.5
-  attackRange: 2
-  attackDamage: 10
+  attackRange: 10
   attackCooldown: 1
   detectionRange: 20
   enemyLayer:
@@ -1354,6 +1353,7 @@ MonoBehaviour:
     moveParameterName: Move
   <Data>k__BackingField: {fileID: 11400000, guid: aa2af9ae870902a4cad6e31bfe43b11a,
     type: 2}
+  attackDamage: 10
 --- !u!4 &990096658 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7691906560353688748, guid: 82beef2b593cef4438a2cc6f82092280,

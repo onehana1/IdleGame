@@ -30,8 +30,7 @@ public class PlayerStateMachine : StateMachine
 
     public Enemy TargetEnemy => Player.TargetEnemy;
     public Transform Transform => Player.transform;
-    public float AttackRange => Player.AttackRange;
-    public float AttackDamage => Player.AttackDamage;
+
 
 
 

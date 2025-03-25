@@ -21,6 +21,7 @@ public abstract class BaseStatData : ScriptableObject
     public float speed;
     public float attackSpeed;
     public float damage;
+    public float attackRange;
     public float defense;
     public float criticalChance;
     public float criticalDamage;

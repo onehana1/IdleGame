@@ -18,6 +18,7 @@ MonoBehaviour:
   speed: 3
   attackSpeed: 3
   damage: 3
+  attackRange: 3
   defense: 3
   criticalChance: 3
   criticalDamage: 3

@@ -30,7 +30,7 @@ public class PlayerAttackState : PlayerBaseState
         }
 
         float distanceToEnemy = Vector3.Distance(stateMachine.Transform.position, stateMachine.TargetEnemy.transform.position);
-        if (distanceToEnemy > stateMachine.AttackRange)
+        if (distanceToEnemy > stateMachine.Player.AttackRange)
         {
             stateMachine.ChangeState(stateMachine.MoveState);
             return;
@@ -41,7 +41,7 @@ public class PlayerAttackState : PlayerBaseState
             Attack();
         }
     }
-    
+
     private void Attack()
     {
         if (stateMachine.TargetEnemy == null)
@@ -52,16 +52,16 @@ public class PlayerAttackState : PlayerBaseState
 
         float distanceToEnemy = Vector3.Distance(stateMachine.Transform.position, stateMachine.TargetEnemy.transform.position);
 
-        if (distanceToEnemy > stateMachine.AttackRange)
+        if (distanceToEnemy > stateMachine.Player.AttackRange)
         {
-            Debug.Log($"Enemy too far to attack. Distance: {distanceToEnemy}, Attack Range: {stateMachine.AttackRange}");
+            Debug.Log($"Enemy too far to attack. Distance: {distanceToEnemy}, Attack Range: {stateMachine.Player.AttackRange}");
             return;
         }
 
         if (stateMachine.TargetEnemy.TryGetComponent<IDamageable>(out IDamageable damageable))
         {
-            damageable.TakeDamage(stateMachine.AttackDamage);
-            Debug.Log($"Dealt {stateMachine.AttackDamage} damage to {stateMachine.TargetEnemy.name}");
+            damageable.TakeDamage(stateMachine.Player.Damage);
+            Debug.Log($"Dealt {stateMachine.Player.Damage} damage to {stateMachine.TargetEnemy.name}");
             lastAttackTime = Time.time;
         }
         else

@@ -23,16 +23,15 @@ public class Player : MonoBehaviour, IDamageDealer, IDamageable
 
 
     [Header("Combat")]
-    [SerializeField] private float attackRange = 2f;
-    [SerializeField] private float attackDamage = 10f;
+
     [SerializeField] private float attackCooldown = 1f;
     [SerializeField] private float detectionRange = 20f;
     [SerializeField] private LayerMask enemyLayer;
 
     public NavMeshAgent Agent { get; private set; }
-    public float AttackRange => attackRange;
+    public float AttackRange => Data.StatData.attackRange;
     public float DetectionRange => detectionRange;
-    public float AttackDamage => attackDamage;
+
     public float AttackCooldown => attackCooldown;
     public LayerMask EnemyLayer => enemyLayer;
 
@@ -51,7 +50,7 @@ public class Player : MonoBehaviour, IDamageDealer, IDamageable
     public bool IsAlive => currentHealth > 0;
     public float CurrentHealth => currentHealth;
     public float MaxHealth => Data.StatData.maxHealth;
-    public float Damage => attackDamage;
+    public float Damage => Data.StatData.damage;
 
     void Awake()
     {
@@ -61,7 +60,7 @@ public class Player : MonoBehaviour, IDamageDealer, IDamageable
         }
         else
         {
-            Debug.LogError("AnimationData is not assigned to the Player!");
+            Debug.LogError("AnimationData 없음");
         }
 
         if (Data != null && Data.StatData != null)
@@ -70,8 +69,7 @@ public class Player : MonoBehaviour, IDamageDealer, IDamageable
         }
         else
         {
-            Debug.LogError("Data or StatData is not properly set up in the Player!");
-            currentHealth = 100f; // 기본값 설정
+            Debug.LogError("Data 없음");
         }
         
         Animator = GetComponentInChildren<Animator>();
@@ -83,7 +81,7 @@ public class Player : MonoBehaviour, IDamageDealer, IDamageable
         // NavMeshAgent 설정
         Agent.speed = moveSpeed;
         Agent.angularSpeed = rotationSpeed;
-        Agent.stoppingDistance = stoppingDistance;
+        Agent.stoppingDistance = Data.StatData.attackRange;
 
         stateMachine = new PlayerStateMachine(this);
         stateMachine.ChangeState(stateMachine.IdleState);
@@ -126,41 +124,9 @@ public class Player : MonoBehaviour, IDamageDealer, IDamageable
     {
         if (target != null)
         {
-            target.TakeDamage(attackDamage);
+            target.TakeDamage(Damage);
+            Debug.Log($"Dealt {Damage} damage to target");
         }
     }
 
-    public void Attack()
-    {
-        if (targetEnemy == null)
-        {
-            Debug.Log("No target enemy");
-            return;
-        }
-
-        if (Time.time < lastAttackTime + attackCooldown)
-        {
-            Debug.Log("Attack on cooldown");
-            return;
-        }
-
-        float distanceToEnemy = Vector3.Distance(transform.position, targetEnemy.transform.position);
-        
-        if (distanceToEnemy > attackRange)
-        {
-            Debug.Log($"Enemy too far to attack. Distance: {distanceToEnemy}, Attack Range: {attackRange}");
-            return;
-        }
-
-        if (targetEnemy.TryGetComponent<IDamageable>(out IDamageable damageable))
-        {
-            damageable.TakeDamage(attackDamage);
-            Debug.Log($"Dealt {attackDamage} damage to {targetEnemy.name}");
-            lastAttackTime = Time.time;
-        }
-        else
-        {
-            Debug.Log($"Enemy {targetEnemy.name} is not damageable");
-        }
-    }
 }
