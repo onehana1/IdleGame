@@ -3,17 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 public class StageManager : MonoBehaviour
 {
-    public StageInfoData currentStage; // StageInfo 대신 StageInfoData 사용
+    public StageInfoData currentStage;
+    public StageInfoData[] stages; 
+    private int currentStageIndex = 0;
     private int remainingMonsters;
 
     void Start()
     {
-        StartStage(currentStage);
+        LoadStages(); 
+        StartStage(currentStageIndex); 
+
     }
 
-    public void StartStage(StageInfoData stage)
+    void LoadStages()
     {
-        currentStage = stage;
+        stages = Resources.LoadAll<StageInfoData>("Stages");
+        if (stages.Length == 0)
+        {
+            Debug.LogError("No stages found in Resources/Stages!");
+        }
+    }
+
+    public void StartStage(int stageIndex)
+    {
+        if(stageIndex<0||stageIndex>=stages.Length)
+        {
+            Debug.LogError("Invalid stage index!");
+            return;
+        }
+
+        currentStageIndex = stageIndex;
+        currentStage = stages[currentStageIndex];
         SpawnMonsters();
     }
 
