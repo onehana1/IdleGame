@@ -96,12 +96,10 @@ public class Player : MonoBehaviour, IDamageDealer, IDamageable
 
         stateMachine = new PlayerStateMachine(this);
         stateMachine.ChangeState(stateMachine.IdleState);
+
+        CharacterManager.Instance.Player = this;
     }
 
-    private void Start()
-    {
-      //  Cursor.lockState = CursorLockMode.Locked;
-    }
 
     private void Update()
     {
