@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ddd880cdbac8a384da365f9b2e7edffa, type: 3}
-  m_Name: 1Stage
+  m_Name: Stage2
   m_EditorClassIdentifier: 
-  stageKey: 0
+  stageKey: 1
   waves:
   - monsters:
     - monsterPrefab: {fileID: 4154155023291310590, guid: fbfe30c6fb2fd3148a9cd717c0a8d174,

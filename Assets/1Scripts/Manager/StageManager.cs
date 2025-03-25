@@ -3,52 +3,52 @@ using System.Collections.Generic;
 using UnityEngine;
 public class StageManager : MonoBehaviour
 {
-    public StageInfoData currentStage;
-    public StageInfoData[] stages; 
-    private int currentStageIndex = 0;
+    public StageInfoData currentStage; // StageInfoData 사용
     private int remainingMonsters;
+    private int currentWaveIndex = 0; // 현재 웨이브 인덱스
 
     void Start()
     {
-        LoadStages(); 
-        StartStage(currentStageIndex); 
-
+        //StartStage(currentStage);
     }
 
-    void LoadStages()
+    public void StartStage(StageInfoData stage)
     {
-        stages = Resources.LoadAll<StageInfoData>("Stages");
-        if (stages.Length == 0)
-        {
-            Debug.LogError("No stages found in Resources/Stages!");
-        }
+        currentStage = stage;
+        currentWaveIndex = 0; // 웨이브 인덱스 초기화
+        SpawnNextWave(); // 첫 번째 웨이브 스폰
     }
 
-    public void StartStage(int stageIndex)
+    void SpawnNextWave()
     {
-        if(stageIndex<0||stageIndex>=stages.Length)
+        if (currentWaveIndex < currentStage.waves.Length)
         {
-            Debug.LogError("Invalid stage index!");
-            return;
-        }
+            WaveData wave = currentStage.waves[currentWaveIndex];
+            remainingMonsters = 0; // 남은 몬스터 수 초기화
 
-        currentStageIndex = stageIndex;
-        currentStage = stages[currentStageIndex];
-        SpawnMonsters();
-    }
-
-
-    void SpawnMonsters()
-    {
-        foreach (var wave in currentStage.waves)
-        {
             foreach (var monster in wave.monsters)
             {
                 remainingMonsters += monster.spawnCount; // 적 수 업데이트
-                SpawnMonster(monster); // monster를 직접 전달
+                SpawnMonster(monster); // 몬스터 스폰
             }
+
+            currentWaveIndex++; // 다음 웨이브로 이동
+        }
+        else
+        {
+            Debug.Log("All waves completed!");
+            StartCoroutine(NextStageAfterDealy(2f));
+           
         }
     }
+
+        IEnumerator NextStageAfterDealy(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            GameManager.instance.LoadNextStage(); 
+        }
+
+
 
     void SpawnMonster(MonsterSpawnData monsterData)
     {
@@ -61,23 +61,18 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    Vector3 GetSpawnPosition()
-    {
-        // 스폰 위치를 랜덤으로 설정
-        return new Vector3(Random.Range(-5f, 5f), 0, Random.Range(-5f, 5f));
-    }
-
     public void OnMonsterDefeated()
     {
         remainingMonsters--;
         if (remainingMonsters <= 0)
         {
-            NextStage();
+            SpawnNextWave(); // 현재 웨이브가 끝나면 다음 웨이브 스폰
         }
     }
 
-    void NextStage()
+    Vector3 GetSpawnPosition()
     {
-        Debug.Log("All monsters defeated! Moving to the next stage.");
+        // 스폰 위치를 랜덤으로 설정
+        return new Vector3(Random.Range(-5f, 5f), 0, Random.Range(-5f, 5f));
     }
 }

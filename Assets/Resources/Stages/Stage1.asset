@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddd880cdbac8a384da365f9b2e7edffa, type: 3}
+  m_Name: Stage1
+  m_EditorClassIdentifier: 
+  stageKey: 0
+  waves:
+  - monsters:
+    - monsterPrefab: {fileID: 4154155023291310590, guid: fbfe30c6fb2fd3148a9cd717c0a8d174,
+        type: 3}
+      spawnCount: 1
+    hasBoss: 0
+    bossType: 
+  - monsters:
+    - monsterPrefab: {fileID: 4154155023291310590, guid: fbfe30c6fb2fd3148a9cd717c0a8d174,
+        type: 3}
+      spawnCount: 2
+    hasBoss: 0
+    bossType: 
