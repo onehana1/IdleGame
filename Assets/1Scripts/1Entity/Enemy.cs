@@ -123,10 +123,10 @@ public class Enemy : MonoBehaviour, IDamageable, IDamageDealer
         StageManager.instance.OnMonsterDefeated();
         StartCoroutine(DestroyAfterDelay());
     }
-
+    private WaitForSeconds destroyDelay = new WaitForSeconds(3f);
     private IEnumerator DestroyAfterDelay()
     {
-        yield return new WaitForSeconds(3f);
+        yield return destroyDelay;
         
         Destroy(gameObject);
     }
