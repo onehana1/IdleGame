@@ -17,15 +17,14 @@ public class HPBar : MonoBehaviour
     {
         damageable = target.GetComponent<IDamageable>();
     }
-    private void Update()
+    private void FixedUpdate()
     {
         if (target == null) return;
 
-        // HP 바 채우기 업데이트
-        float fillAmount = damageable.CurrentHealth / damageable.MaxHealth;
-        hpFillImage.fillAmount = fillAmount;
+        float fillAmount = (float)damageable.CurrentHealth / damageable.MaxHealth;
+        hpFillImage.fillAmount = Mathf.Clamp(fillAmount, 0f, 1f);
 
-        // HP 텍스트 업데이트 (현재 체력/최대 체력)
+
         hpText.text = $"{Mathf.Ceil(damageable.CurrentHealth)} / {damageable.MaxHealth}";
     }
 }
