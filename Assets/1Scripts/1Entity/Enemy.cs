@@ -124,6 +124,12 @@ public class Enemy : MonoBehaviour, IDamageable, IDamageDealer
         {
             Instantiate(Data.dropItem, transform.position, Quaternion.identity);
         }
+        if (CharacterManager.Instance != null && CharacterManager.Instance.Player != null)
+        {
+            CharacterManager.Instance.Player.Coin += 5;
+        }
+
+
         StageManager.instance.OnMonsterDefeated();
         StartCoroutine(DestroyAfterDelay());
     }

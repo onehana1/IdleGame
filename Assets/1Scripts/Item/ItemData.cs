@@ -23,8 +23,8 @@ public class ItemDataConsumable
     public float value;
 
     public StatType statType; 
-    public bool isTemporary;  // ÀÏ½ÃÀû?
-    public float duration; // Áö¼Ó ½Ã°£ 
+    public bool isTemporary;  // ï¿½Ï½ï¿½ï¿½ï¿½?
+    public float duration; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ 
 }
 
 [CreateAssetMenu(fileName = "Item", menuName = "New Item")]
@@ -36,6 +36,8 @@ public class ItemData : ScriptableObject
     public ItemType type;
     public Sprite icon;
     public GameObject dropPrefab;
+
+    public int price;
 
     [Header("Stacking")]
     public bool canStack;
@@ -56,11 +58,11 @@ public class ItemData : ScriptableObject
 
 
 [Serializable] 
-public class ItemSlotData  // ¾ÆÀÌÅÛ µ¥ÀÌÅÍ·Î´Â °³¼ö ¸øÇÏ´Ï±î ¾ÆÀÌÅÛ ±¸Á¶ Ãß°¡
+public class ItemSlotData  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í·Î´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 {
     public ItemData item;
     public int quantity;
-    public bool isEquipped; // ÀåÂøÇÔ?
+    public bool isEquipped; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?
 
     public ItemSlotData(ItemData item, int quantity)
     {

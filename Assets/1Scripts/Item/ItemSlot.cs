@@ -14,7 +14,7 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public Image icon;
     public TextMeshProUGUI quantityText;
     private Outline outline;
-    public GameObject equipIndicator;   // ÀåÂøÁß Ç¥½Ã
+    public GameObject equipIndicator;   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
 
     public int index;
     public bool equipped;
@@ -38,8 +38,28 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
     }
 
+
+    public void Setup(ItemData newItem)
+    {
+        item = newItem;
+        if(newItem != null)
+        {
+            icon.sprite = newItem.icon;
+            icon.enabled = true;
+        }
+        else{
+            item = null;
+            icon.sprite = null;
+            icon.enabled = false;
+        }
+    }
     public void Set()
     {
+        if (item == null)
+        {
+            return; 
+        }
+
         icon.gameObject.SetActive(true);
         icon.sprite = item.icon;
 
@@ -88,7 +108,7 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             inventory.HideItemTooltip();
         }
     }
-    public void OnClickButton() // ¹öÆ° Å¬¸¯
+    public void OnClickButton() // ï¿½ï¿½Æ° Å¬ï¿½ï¿½
     {
         if (inventory == null)
         {
@@ -101,6 +121,16 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
 
         inventory.SelectItem(index);
+    }
+
+    public void onClickButton2()
+    {
+        if(inventory == null)
+        {
+            return;
+        }
+
+        StoreUI.instance.SelectItem(index);
     }
 }
 

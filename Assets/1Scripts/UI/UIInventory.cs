@@ -189,7 +189,6 @@ public class UIInventory : MonoBehaviour
     {
         if (slots[index].item == null) return;
 
-        // ���� �����Ѱ� ������ �װ� �ƿ����� ���ְ� �״����� �ƿ����� �ֱ�
         if (selectedItem != null)
         {
             selectedItem.SetOutline(false);
@@ -200,7 +199,6 @@ public class UIInventory : MonoBehaviour
 
         selectedItem.SetOutline(true);
 
-        Debug.Log($"���õ� ������: {selectedItem.item.displayName}, Ÿ��: {selectedItem.item.type}");
 
 
         bool isEquipped = InventoryManager.Instance.IsEquipped(selectedItem.item);
@@ -231,6 +229,7 @@ public class UIInventory : MonoBehaviour
             SetSelectItemClear();
         }
     }
+
 
 
     public void OnThrowButton()

@@ -58,6 +58,15 @@ public class InventoryManager : MonoBehaviour
 
     }
 
+    public void BuyItem(ItemData selectedItem)
+    {
+        if (selectedItem == null) return;
+        if (CharacterManager.Instance != null && CharacterManager.Instance.Player != null)
+        {
+            CharacterManager.Instance.Player.Coin -= selectedItem.price;
+        }
+        AddItem(selectedItem);
+    }
 
     public void ThrowItem(ItemData selectedItem, Vector3 dropPos)
     {
