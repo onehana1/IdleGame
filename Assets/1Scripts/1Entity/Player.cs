@@ -44,6 +44,7 @@ public class Player : MonoBehaviour, IDamageDealer, IDamageable
 
     [Header("Inventory")]
 
+    public InventoryManager inventory;
     public PlayerEquipment equipment;
     public ItemData itemData;
     public Action addItem;
@@ -101,6 +102,11 @@ public class Player : MonoBehaviour, IDamageDealer, IDamageable
     }
 
 
+    void Start()
+    {
+      //  inventory = gameObject.AddComponent<InventoryManager>();
+    }
+
     private void Update()
     {
         stateMachine.HandleInput();
@@ -138,4 +144,19 @@ public class Player : MonoBehaviour, IDamageDealer, IDamageable
         }
     }
 
+    // private void OnTriggerEnter(Collider other)
+    // {
+
+    //     if (other.gameObject.layer == LayerMask.NameToLayer("Item"))
+    //     {
+    //         Debug.LogAssertion("Item 충돌");
+    //         ItemObject item = other.GetComponent<ItemObject>();
+    //         if (item != null)
+    //         {
+    //             inventory.AddItem(item.data);
+    //             Debug.Log($"{item.data.name} added to inventory.");
+    //             Destroy(other.gameObject);
+    //         }
+    //     }
+    // }
 }
