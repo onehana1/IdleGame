@@ -49,6 +49,7 @@ public class Player : MonoBehaviour, IDamageDealer, IDamageable
     public ItemData itemData;
     public Action addItem;
 
+    public int Coin;
 
 
 
@@ -64,6 +65,9 @@ public class Player : MonoBehaviour, IDamageDealer, IDamageable
     public float MaxHealth => Data.StatData.maxHealth;
     public float Damage => Data.StatData.damage;
 
+    public int Level => Data.StatData.LV;
+
+    public string PlayerName => Data.StatData.characterName;
     void Awake()
     {
         if (AnimationData != null)

@@ -14,7 +14,7 @@ public abstract class BaseStatData : ScriptableObject
 {
     [Header("Info")]
     public string characterName;
-    public float LV;
+    public int LV;
 
     [Header("Stat")]
     public float maxHealth;

@@ -17,6 +17,9 @@ public class UIInventory : MonoBehaviour
     public TextMeshProUGUI itemNameText;
     public TextMeshProUGUI itemDescriptionText;
     public TextMeshProUGUI itemStatsText;
+
+    public TextMeshProUGUI playerStat;
+
     public GameObject useButton;
     public GameObject equipUseButton;
     public GameObject unEquipUseButton;
@@ -103,6 +106,7 @@ public class UIInventory : MonoBehaviour
                 slots[i].Clear();
             }
         }
+        ShowPlayerStat();
     }
 
 
@@ -129,6 +133,19 @@ public class UIInventory : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void ShowPlayerStat()
+    {
+        playerStat.text = $"Player Stat\n" +
+            $"Name: {CharacterManager.Instance.Player.PlayerName}\n" +
+            $"Level: {CharacterManager.Instance.Player.Level}\n" +
+            $"Health: {CharacterManager.Instance.Player.CurrentHealth} / {CharacterManager.Instance.Player.MaxHealth}\n" +
+            $"Damage: {CharacterManager.Instance.Player.Damage}\n" +
+            $"Defense: {CharacterManager.Instance.Player.Data.StatData.defense}\n" +
+            $"\nCoin: {CharacterManager.Instance.Player.Coin}\n";
+    
+
     }
 
     public void ShowItemTooltip(ItemSlot slot)
