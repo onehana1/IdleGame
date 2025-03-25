@@ -19,4 +19,6 @@ public class EnemySO : ScriptableObject
   [field: SerializeField] public EnemyMovementData MovementData { get; private set; }
   [field: SerializeField] public EnemyStatData StatData { get; private set; }
   [field: SerializeField] public Color Color { get; private set; }
+
+  [field: SerializeField] public GameObject dropItem{get; private set;}
 }

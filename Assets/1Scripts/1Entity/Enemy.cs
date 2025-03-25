@@ -120,6 +120,10 @@ public class Enemy : MonoBehaviour, IDamageable, IDamageDealer
         {
             collider.enabled = false;
         }
+        if(Data.dropItem != null)
+        {
+            Instantiate(Data.dropItem, transform.position, Quaternion.identity);
+        }
         StageManager.instance.OnMonsterDefeated();
         StartCoroutine(DestroyAfterDelay());
     }

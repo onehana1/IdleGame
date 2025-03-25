@@ -38,7 +38,7 @@ public class UIInventory : MonoBehaviour
 
         CharacterManager.Instance.Player.addItem += AddItem;
 
-        inventoryWindow.SetActive(true);
+        inventoryWindow.SetActive(false);
         itemTooltip.SetActive(false);
 
         slots = new ItemSlot[slotPanel.childCount];

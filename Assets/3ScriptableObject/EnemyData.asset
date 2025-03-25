@@ -18,3 +18,5 @@ MonoBehaviour:
   <StatData>k__BackingField: {fileID: 11400000, guid: 2167c52dc12fe6b43a5b5b3a0a0af5c0,
     type: 2}
   <Color>k__BackingField: {r: 0, g: 1, b: 0.06572652, a: 0}
+  <dropItem>k__BackingField: {fileID: 70904503708091514, guid: 07f69273d05bfbf4f98d0f7929770c91,
+    type: 3}
