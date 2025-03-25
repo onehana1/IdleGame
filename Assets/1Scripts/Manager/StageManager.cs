@@ -3,9 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 public class StageManager : MonoBehaviour
 {
+    public static StageManager instance{get; private set;}
+
     public StageInfoData currentStage; // StageInfoData 사용
     private int remainingMonsters;
     private int currentWaveIndex = 0; // 현재 웨이브 인덱스
+
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
 
     void Start()
     {

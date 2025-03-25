@@ -17,6 +17,12 @@ MonoBehaviour:
   - monsters:
     - monsterPrefab: {fileID: 4154155023291310590, guid: fbfe30c6fb2fd3148a9cd717c0a8d174,
         type: 3}
-      spawnCount: 3
+      spawnCount: 2
+    hasBoss: 0
+    bossType: 
+  - monsters:
+    - monsterPrefab: {fileID: 4154155023291310590, guid: fbfe30c6fb2fd3148a9cd717c0a8d174,
+        type: 3}
+      spawnCount: 2
     hasBoss: 0
     bossType: 

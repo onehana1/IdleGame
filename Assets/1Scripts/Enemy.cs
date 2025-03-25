@@ -120,7 +120,7 @@ public class Enemy : MonoBehaviour, IDamageable, IDamageDealer
         {
             collider.enabled = false;
         }
-
+        StageManager.instance.OnMonsterDefeated();
         StartCoroutine(DestroyAfterDelay());
     }
 
