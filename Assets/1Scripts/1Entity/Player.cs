@@ -98,6 +98,8 @@ public class Player : MonoBehaviour, IDamageDealer, IDamageable
         stateMachine = new PlayerStateMachine(this);
         stateMachine.ChangeState(stateMachine.IdleState);
 
+        equipment = GetComponent<PlayerEquipment>();
+
         CharacterManager.Instance.Player = this;
     }
 

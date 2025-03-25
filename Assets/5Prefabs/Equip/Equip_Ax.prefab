@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 650999923503958699}
-  - component: {fileID: 6812618421945533851}
+  - component: {fileID: 8699911764141972074}
   m_Layer: 10
   m_Name: Equip_Ax
   m_TagString: Untagged
@@ -116,7 +116,7 @@ Transform:
   - {fileID: 5468223583449844727}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 85}
---- !u!114 &6812618421945533851
+--- !u!114 &8699911764141972074
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,17 +125,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 9063602128079564699}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8550b248e24cbcf4e905c45a874419e5, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e8b32192eb71a24eba25e85ec3c98d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackRate: 0.5
   attackDistance: 1
-  doesGatherResources: 1
-  doesDealDamage: 1
-  damage: 10
-  useStamina: 10
+  doesGatherResources: 0
+  doesDealDamage: 0
+  damage: 0
+  useStamina: 0
   playerPos: {fileID: 0}
   gatherRadius: 1.5
   resourceLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
