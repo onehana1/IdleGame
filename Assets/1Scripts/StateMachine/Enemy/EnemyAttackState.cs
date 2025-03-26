@@ -11,6 +11,7 @@ public class EnemyAttackState : EnemyBaseState
     public override void Enter()
     {
         StartAnimation(stateMachine.Enemy.AnimationData.AttackParameterHash);
+        Attack();
     }
 
     public override void Exit()
@@ -25,6 +26,21 @@ public class EnemyAttackState : EnemyBaseState
         {
             stateMachine.ChangeState(stateMachine.IdleState);
             return;
+        }
+    }
+
+
+    private void Attack()
+    {
+        // 적이 플레이어에게 데미지를 줌
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            IDamageable damageable = player.GetComponent<IDamageable>();
+            if (damageable != null)
+            {   
+                damageable.TakeDamage(stateMachine.Enemy.Damage);
+            }
         }
     }
 }

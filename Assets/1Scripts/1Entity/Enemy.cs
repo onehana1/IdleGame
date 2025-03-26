@@ -51,11 +51,24 @@ public class Enemy : MonoBehaviour, IDamageable, IDamageDealer
     {
         stateMachine.HandleInput();
         stateMachine.Update();
+        if(IsPlayerInAttackRange())
+        {
+            stateMachine.ChangeState(stateMachine.AttackState);
+        }
     }
 
     private void FixedUpdate()
     {
         stateMachine.PhysicsUpdate();
+    }
+
+    public bool IsPlayerInAttackRange()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null) return false;
+
+        float distance = Vector3.Distance(transform.position, player.transform.position);
+        return distance <= AttackRange;
     }
 
     public bool IsPlayerInRange(float detectionRange)
