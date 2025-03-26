@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class StoreUI : MonoBehaviour
@@ -14,12 +15,19 @@ public class StoreUI : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
     }
 
-    void Start()
+    private void OnEnable()
     {
-        slots = GetComponentsInChildren<ItemSlot>();
-        
+        SettingStore();
+    }
+
+
+    public void SettingStore()
+    {
+        slots = GetComponentsInChildren<ItemSlot>(true);
+
         for (int i = 0; i < slots.Length; i++)
         {
             slots[i].index = i;
@@ -29,6 +37,19 @@ public class StoreUI : MonoBehaviour
             }
 
         }
+    }
+
+    void Start()
+    {
+        // for (int i = 0; i < slots.Length; i++)
+        // {
+        //     slots[i].index = i;
+        //     if (slots[i].item != null)
+        //     {
+        //         slots[i].Set();
+        //     }
+
+        // }
     }
 
     public void SelectItem(int index)
