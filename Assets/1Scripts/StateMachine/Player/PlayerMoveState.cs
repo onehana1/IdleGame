@@ -10,7 +10,6 @@ public class PlayerMoveState : PlayerBaseState
 
     public override void Enter()
     {
-        Debug.Log("Entering Move State");
         StartAnimation(stateMachine.Player.AnimationData.WalkParameterHash);
 
         FindNearestEnemy();

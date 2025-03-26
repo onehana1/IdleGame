@@ -76,7 +76,6 @@ public class Player : MonoBehaviour, IDamageDealer, IDamageable
         }
         else
         {
-            Debug.LogError("AnimationData 없음");
         }
 
         if (Data != null && Data.StatData != null)
@@ -85,7 +84,6 @@ public class Player : MonoBehaviour, IDamageDealer, IDamageable
         }
         else
         {
-            Debug.LogError("Data 없음");
         }
         
         Animator = GetComponentInChildren<Animator>();
@@ -132,12 +130,10 @@ public class Player : MonoBehaviour, IDamageDealer, IDamageable
         if (!IsAlive)
         {
             // TODO: 사망 처리
-            Debug.Log("Player died!");
         }
         else
         {
             // TODO: 피격 애니메이션 또는 효과
-            Debug.Log($"Player took {actualDamage} damage! Current health: {currentHealth}");
         }
     }
 
@@ -146,7 +142,6 @@ public class Player : MonoBehaviour, IDamageDealer, IDamageable
         if (target != null)
         {
             target.TakeDamage(Damage);
-            Debug.Log($"Dealt {Damage} damage to target");
         }
     }
 

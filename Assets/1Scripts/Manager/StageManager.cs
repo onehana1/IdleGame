@@ -51,7 +51,6 @@ public class StageManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("All waves completed!");
             StartCoroutine(NextStageAfterDealy(2f));
            
         }
@@ -72,7 +71,6 @@ public class StageManager : MonoBehaviour
             GameObject spawnedMonster = Instantiate(monsterData.monsterPrefab);
             spawnedMonster.name = monsterData.monsterPrefab.name; // 적 이름 설정
             spawnedMonster.transform.position = GetSpawnPosition(); // 스폰 위치 설정
-            Debug.Log($"Spawning {monsterData.spawnCount} of {spawnedMonster.name}");
         }
     }
 

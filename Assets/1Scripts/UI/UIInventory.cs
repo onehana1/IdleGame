@@ -75,7 +75,7 @@ public class UIInventory : MonoBehaviour
     {
         ItemData data = CharacterManager.Instance.Player.itemData;
 
-        if (data == null) { Debug.Log("�����Ͱ� null"); return; }
+        if (data == null) { return; }
 
         // InventoryManager�� ������ �߰�
         InventoryManager.Instance.AddItem(data);

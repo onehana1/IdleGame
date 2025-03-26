@@ -19,7 +19,7 @@ public class InventoryManager : MonoBehaviour
 
 
     [SerializeField] private List<ItemSlotData> inventory = new List<ItemSlotData>();
-    public event Action onInventoryUpdated; // �κ��� �� ������ ui�߰����ִ� �̺�Ʈ �߰�
+    public event Action onInventoryUpdated;
 
     public void AddItem(ItemData newItem)
     {
@@ -32,14 +32,12 @@ public class InventoryManager : MonoBehaviour
             {
                 existingSlot.quantity++;
                 onInventoryUpdated?.Invoke();
-                Debug.Log($"{newItem.displayName} ���� ����: {existingSlot.quantity}");
                 return;
             }
         }
 
         inventory.Add(new ItemSlotData(newItem, 1));
         onInventoryUpdated?.Invoke();
-        Debug.Log($"�� ������ �߰�: {newItem.displayName}");
     }
 
     public void UseItem(ItemData selectedItem)

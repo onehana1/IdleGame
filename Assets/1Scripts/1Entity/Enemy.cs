@@ -96,7 +96,6 @@ public class Enemy : MonoBehaviour, IDamageable, IDamageDealer
         }
         else
         {
-            Debug.Log($"{gameObject.name} took {actualDamage} damage! Current health: {currentHealth}");
             // TODO: 피격 상태로 전환
             // stateMachine.ChangeState(stateMachine.HitState);
         }
@@ -104,7 +103,6 @@ public class Enemy : MonoBehaviour, IDamageable, IDamageDealer
 
     private void Die()
     {
-        Debug.Log($"{gameObject.name} died!");
 
         if (Animator != null)
         {

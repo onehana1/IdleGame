@@ -40,7 +40,6 @@ public class PlayerIdleState : PlayerGroundedState
             // 적이 존재하고 일정 시간이 지났다면 Move 상태로 전환
             if (enemiesExist && idleTimer >= IDLE_DURATION)
             {
-                Debug.Log("Idle State: Enemies exist and idle duration completed, changing to move state");
                 stateMachine.ChangeState(stateMachine.MoveState);
             }
         }
