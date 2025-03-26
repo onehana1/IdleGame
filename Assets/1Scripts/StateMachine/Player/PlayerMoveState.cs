@@ -38,6 +38,12 @@ public class PlayerMoveState : PlayerBaseState
 
         // 적을 향해 이동
         stateMachine.Player.Agent.SetDestination(stateMachine.Player.TargetEnemy.transform.position);
+        // 적을 향해 자연스러운 회전
+        Vector3 direction = (stateMachine.Player.TargetEnemy.transform.position - stateMachine.Player.transform.position).normalized;
+        stateMachine.Player.transform.rotation = Quaternion.Slerp(stateMachine.Player.transform.rotation, Quaternion.LookRotation(direction), 
+        stateMachine.Player.rotationSpeed * Time.deltaTime);
+
+
 
         // 공격 범위 안에 들어오면 공격 상태로 전환
         if (Vector3.Distance(stateMachine.Player.transform.position, stateMachine.Player.TargetEnemy.transform.position) <= stateMachine.Player.AttackRange)

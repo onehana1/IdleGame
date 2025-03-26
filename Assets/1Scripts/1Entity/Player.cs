@@ -13,7 +13,7 @@ public class Player : MonoBehaviour, IDamageDealer, IDamageable
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float rotationSpeed = 10f;
+    public float rotationSpeed = 10f;
     [SerializeField] private float stoppingDistance = 1.5f;
 
     public Animator Animator { get; private set; }
@@ -35,7 +35,7 @@ public class Player : MonoBehaviour, IDamageDealer, IDamageable
     public float AttackCooldown => attackCooldown;
     public LayerMask EnemyLayer => enemyLayer;
 
-    private PlayerStateMachine stateMachine;
+    public PlayerStateMachine stateMachine;
     private float lastAttackTime;
     private Enemy targetEnemy;
 
@@ -137,11 +137,29 @@ public class Player : MonoBehaviour, IDamageDealer, IDamageable
         }
     }
 
+    public void RotationDamping(float rotationDamping)
+    {
+        rotationDamping = rotationSpeed;
+    }
     public void DealDamage(IDamageable target)
     {
         if (target != null)
         {
             target.TakeDamage(Damage);
+        }
+    }
+
+    public void Attack()
+    {
+        if (stateMachine.TargetEnemy == null || !stateMachine.TargetEnemy.IsAlive)
+        {
+            return;
+        }
+
+        if (stateMachine.TargetEnemy.TryGetComponent<IDamageable>(out IDamageable damageable))
+        {
+            damageable.TakeDamage(stateMachine.Player.Damage);
+            lastAttackTime = Time.time;
         }
     }
 
